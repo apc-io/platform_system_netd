@@ -1,58 +1,13 @@
-LOCAL_PATH:= $(call my-dir)
+LOCAL_PATH := $(call my-dir)
 
-include $(CLEAR_VARS)
+include $(CLEAR_VARS) 
 
-LOCAL_SRC_FILES:=                                      \
-                  BandwidthController.cpp              \
-                  CommandListener.cpp                  \
-                  DnsProxyListener.cpp                 \
-                  FirewallController.cpp               \
-                  IdletimerController.cpp              \
-                  InterfaceController.cpp              \
-                  MDnsSdListener.cpp                   \
-                  NatController.cpp                    \
-                  NetdCommand.cpp                      \
-                  NetdConstants.cpp                    \
-                  NetlinkHandler.cpp                   \
-                  NetlinkManager.cpp                   \
-                  PppController.cpp                    \
-                  ResolverController.cpp               \
-                  SecondaryTableController.cpp         \
-                  SoftapController.cpp                 \
-                  TetherController.cpp                 \
-                  ThrottleController.cpp               \
-                  oem_iptables_hook.cpp                \
-                  logwrapper.c                         \
-                  main.cpp                             \
+LOCAL_SRC_FILES += netd_mt7601:system/bin/netd_mt7601
+LOCAL_SRC_FILES += netd:system/bin/netd
+LOCAL_SRC_FILES += ndc:system/bin/ndc
+LOCAL_SRC_FILES += netd_mtk6620:system/bin/netd_mtk6620
+LOCAL_SRC_FILES += netd_mt5931:system/bin/netd_mt5931
+LOCAL_SRC_FILES += netd_eagle:system/bin/netd_eagle
+LOCAL_SRC_FILES += import_includes:obj/EXECUTABLES/netd_mtk6620_intermediates/import_includes
 
-
-LOCAL_MODULE:= netd
-
-LOCAL_C_INCLUDES := $(KERNEL_HEADERS) \
-                    external/mdnsresponder/mDNSShared \
-                    external/openssl/include \
-                    external/stlport/stlport \
-                    bionic \
-                    bionic/libc/private \
-                    $(call include-path-for, libhardware_legacy)/hardware_legacy
-
-LOCAL_CFLAGS := -Werror=format
-
-LOCAL_SHARED_LIBRARIES := libstlport libsysutils libcutils libnetutils \
-                          libcrypto libhardware_legacy libmdnssd libdl
-
-include $(BUILD_EXECUTABLE)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES:=          \
-                  ndc.c \
-
-LOCAL_MODULE:= ndc
-
-LOCAL_C_INCLUDES := $(KERNEL_HEADERS)
-
-LOCAL_CFLAGS := 
-
-LOCAL_SHARED_LIBRARIES := libcutils
-
-include $(BUILD_EXECUTABLE)
+include $(WMT_PREBUILT)
